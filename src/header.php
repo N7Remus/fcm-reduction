@@ -20,8 +20,6 @@
             </ul>
           </div>
         </li>
-        <li><a href="/simulations" class="nav-link px-2 link-dark">Szimuláció(k)</a></li>
-        <li><a href="/reductions" class="nav-link px-2 link-dark">Redukció(k)</a></li>
 
         <li>
           <div class="dropdown text-end ">
