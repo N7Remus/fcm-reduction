@@ -1,23 +1,25 @@
 version: '3.3'
 services:
+  mysql:
+    image: mysql:8.0
+    command: mysqld --user=root
+    volumes:
+      - ./data.sql:/docker-entrypoint-initdb.d/1.sql
+    environment:
+      MYSQL_DATABASE: sablon
+      MYSQL_USER: sablon
+      MYSQL_PASSWORD: sablon
+      MYSQL_ROOT_PASSWORD: sablon
+
   fcm_web:
     restart: unless-stopped
     volumes:
       - ./src:/var/www/html
     container_name: fcm_web
+    links:
+      - "mysql:mysql"
     ports:
       - 8080:80
     build:
       context: .
       dockerfile: Dockerfile-web
-
-    mysql:
-        image: mysql:5.7
-        command: mysqld --user=root
-        volumes:
-          - ./data.sql:/docker-entrypoint-initdb.d
-        environment:
-          MYSQL_DATABASE: sablon
-          MYSQL_USER: sablon
-          MYSQL_PASSWORD: sablon
-          MYSQL_ROOT_PASSWORD: sablon

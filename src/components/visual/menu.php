@@ -7,8 +7,8 @@
       <button type="button" class="btn btn-primary" onclick="runMySimulation()">Szimulálás</button>
       <button type="button" class="btn btn-primary" onclick="runMyReduction()">Redukció</button>
 
-      <button type="button" class="btn btn-primary" onclick="runServerSimulation()">Szerver oldali szimulálás</button>
-      <button type="button" class="btn btn-primary" onclick="runServerReduction()">Szerver oldali redukció</button>
+      <!-- <button type="button" class="btn btn-primary" onclick="runServerSimulation()">Szerver oldali szimulálás</button>
+      <button type="button" class="btn btn-primary" onclick="runServerReduction()">Szerver oldali redukció</button> -->
     </div>
   </div>
 </div>
