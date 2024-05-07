@@ -103,7 +103,6 @@ include DIR . "components/visual/menu.php";
         </div>
 
         <div class="tab-pane fade" id="nav-table" role="tabpanel" aria-labelledby="nav-table-tab">
-            table
             <?php if (count($init_state) < 100) {
                 include DIR . "components/visual/table.php";
             } else {
