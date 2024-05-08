@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `model` (
   `mid` int NOT NULL,
+  `uid` int NOT NULL,
   `model_name` text COLLATE utf8mb3_unicode_ci NOT NULL,
   `model_init_state` json NOT NULL,
   `model_conn_matrix` mediumblob NOT NULL,
@@ -85,13 +86,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT a táblához `model`
 --
 ALTER TABLE `model`
-  MODIFY `mid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `mid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT a táblához `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `userid` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

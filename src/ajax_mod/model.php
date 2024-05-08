@@ -5,10 +5,10 @@ function getModels()
 {
     global $fcm_pdo;
 
-    $sql = "SELECT * FROM `model`";
+    $sql = "SELECT * FROM `model` WHERE uid=?";
     $sel = $fcm_pdo->prepare($sql);
     // params
-    $p = [];
+    $p = [$_SESSION["userId"]];
 
     if ($sel->execute($p)) {
         $ret = $sel->fetchAll(PDO::FETCH_ASSOC);
@@ -23,10 +23,10 @@ function getModelBin($id)
 {
     global $fcm_pdo;
 
-    $sql = "SELECT * FROM `model` WHERE mid=?";
+    $sql = "SELECT * FROM `model` WHERE mid=? and uid=?";
     $sel = $fcm_pdo->prepare($sql);
     // params
-    $p = [$id];
+    $p = [$id,$_SESSION["userId"]];
 
     if ($sel->execute($p)) {
         $ret = $sel->fetch(PDO::FETCH_ASSOC)["model_conn_matrix"];
@@ -41,10 +41,10 @@ function getModel($id)
 {
     global $fcm_pdo;
 
-    $sql = "SELECT * FROM `model` WHERE mid=?";
+    $sql = "SELECT * FROM `model` WHERE mid=? and uid=?";
     $sel = $fcm_pdo->prepare($sql);
     // params
-    $p = [$id];
+    $p = [$id,$_SESSION["userId"]];
 
     if ($sel->execute($p)) {
         $ret = $sel->fetch(PDO::FETCH_ASSOC);
@@ -61,11 +61,12 @@ function saveModel($params)
 {
     global $fcm_pdo;
 
-    $sel = $fcm_pdo->prepare("INSERT INTO model (model_name, model_init_state,model_conn_matrix) VALUES (?,?,?)");
+    $sel = $fcm_pdo->prepare("INSERT INTO model (model_name, model_init_state,model_conn_matrix,uid) VALUES (?,?,?,?)");
     $p = [
         $params["name"],
         $params["init_state"],
-        $params["connection_matrix"]
+        $params["connection_matrix"],
+        $_SESSION["userId"]
     ];
     $res = $sel->execute($p);
     if ($res) {
@@ -81,11 +82,12 @@ function updateModel($model_id,$init_state,$connection_matrix)
 {
     global $fcm_pdo;
 
-    $sel = $fcm_pdo->prepare("UPDATE model SET model_init_state = ?,model_conn_matrix = ? WHERE mid=?;");
+    $sel = $fcm_pdo->prepare("UPDATE model SET model_init_state = ?,model_conn_matrix = ? WHERE mid=? AND uid=?;");
     $p = [
         $init_state,
         $connection_matrix,
-        $model_id
+        $model_id,
+        $_SESSION["userId"]
     ];
     $res = $sel->execute($p);
 
@@ -95,11 +97,12 @@ function updateModelParams($model_id,$model_name,$params_json)
 {
     global $fcm_pdo;
 
-    $sel = $fcm_pdo->prepare("UPDATE model SET model_options = ?,model_name=? WHERE mid=?;");
+    $sel = $fcm_pdo->prepare("UPDATE model SET model_options = ?,model_name=? WHERE mid=? and uid=?;");
     $p = [
         $params_json,
         $model_name,
-        $model_id
+        $model_id,
+        $_SESSION["userId"]
     ];
     $res = $sel->execute($p);
 

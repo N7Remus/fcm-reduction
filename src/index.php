@@ -2,15 +2,13 @@
 ob_start(); // ensures anything dumped out will be caught
 
 session_start();
-
 require_once "include/config.inc.php";
 require_once "include/mysql.php";
-
 require_once "include/functions.php";
 
 
 
-if (!isset($_SESSION) && !$_SESSION['isAdmin']) {
+if (!isset($_SESSION) || !$_SESSION['isAdmin']) {
 
     include "login.php";
     exit();

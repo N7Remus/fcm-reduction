@@ -2,9 +2,12 @@
 require_once "include/config.inc.php";
 require_once "include/mysql.php";
 require_once "include/functions.php";
+
+
 if (empty($_SESSION) && session_status() === PHP_SESSION_NONE) {
-//    session_start();
+    session_start();
 }
+
 
 //global $fmc_pdo;
 //var_dump($fmc_pdo);
@@ -12,8 +15,10 @@ if (empty($_SESSION) && session_status() === PHP_SESSION_NONE) {
 //var_dump(safeEncrypt("R00TMoos6eiv"));
 if (!empty($_POST)){
     if (!empty($_POST["password"]) && !empty($_POST["username"])){
-        if (verifyAdministratorAccount($_POST["username"],safeEncrypt($_POST["password"]))){
+        $userId = verifyAdministratorAccount($_POST["username"],safeEncrypt($_POST["password"]));
+        if ($userId!=false){
             $_SESSION['isAdmin'] = true;
+            $_SESSION['userId'] = $userId;
             //echo "success";
         }else{
             // hibás felhasználónév / jelszó

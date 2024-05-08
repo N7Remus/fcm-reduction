@@ -17,7 +17,7 @@ function verifyAdministratorAccount($username,$password){
     $sel->execute([$username,$password]);
     if ($sel->rowCount() > 0) {
       // got result 
-      return true;
+      return $sel->fetch(PDO::FETCH_ASSOC)["userid"];
     }
     return false;
 }

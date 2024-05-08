@@ -1,6 +1,4 @@
 <?php
-
-
 define("ENC_DEC_PASS",":o");
 define('BASE_URL', '');
 define('LOGOUT_LINK', '');
