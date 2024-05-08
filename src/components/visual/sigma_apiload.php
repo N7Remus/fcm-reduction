@@ -82,6 +82,29 @@
 </div>
 
 
+<div class="modal fade" id="editNModal" tabindex="-1" aria-labelledby="editNModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editNModalLabel">Csúcs szerkesztése</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <input type="hidden" id="node-custId" value="">
+
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="" class="form-label">Csúcs kezdeti értéke</label>
+                    <input type="number" class="form-control" id="nodevalue">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                <button type="button" class="btn btn-primary" onclick="sigUpdateNode();">Mentés</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -144,11 +167,17 @@
     include "fcm.js";
     ?>
 
-    function showNodeEditModal(edge) {
-        console.log("showNodeEditModal()");
+    function showEditModal(edge) {
+        console.log("showEditModal()");
         $('#editModal').modal('show');
         $('#edge-custId').val(edge);
         $('#edgevalue').val(graph.getEdgeAttributes(edge).label);
+    }
+    function showNodeEditModal(node) {
+        console.log("showNodeEditModal()");
+        $('#editNModal').modal('show');
+        $('#node-custId').val(node);
+        $('#nodevalue').val(fcm2.getNodeVal(node));
     }
     const randomHexColorCode = () => {
         let n = (Math.random() * 0xfffff * 1000000).toString(16);
@@ -156,6 +185,11 @@
     };
     function sigUpdateEdge() {
         fcm2.updateEdge();
+        fcm2.genFCMTable();
+    }
+
+    function sigUpdateNode() {
+        fcm2.updateNode();
         fcm2.genFCMTable();
     }
 
@@ -355,7 +389,7 @@
             console.log("Double", e);
             //if (fcm.mode==edit)
             if (true) {
-                showNodeEditModal();
+                showNodeEditModal(e.node);
             }
 
             e.preventSigmaDefault();
@@ -411,7 +445,7 @@
         // click on edge to edit it
         renderer.on('clickEdge', function(e) {
             console.log("clickEdge", e);
-            showNodeEditModal(e.edge);
+            showEditModal(e.edge);
             e.preventSigmaDefault();
 
         });
