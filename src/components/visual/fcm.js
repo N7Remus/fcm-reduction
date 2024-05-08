@@ -93,7 +93,7 @@ class FCM {
         if (coordForGraph !== null) {
             graph.addNode(name, {
                 ...coordForGraph,
-                size: 10,
+                size: 15,
                 label: name,
                 color: randomHexColorCode()
             });
@@ -101,7 +101,7 @@ class FCM {
             graph.addNode(name, {
                 x: 0,
                 y: 0,
-                size: 10,
+                size: 15,
                 label: name,
                 color: randomHexColorCode()
             });
@@ -122,12 +122,12 @@ class FCM {
         // set internal value
         this.connection_matrix[Object.keys(this.init_state).indexOf(from)][Object.keys(this.init_state).indexOf(to)] = parseFloat($('#edgevalue').val());
         // set edge label
-        graph.setEdgeAttribute($('#edge-custId').val(), 'label', ($('#edgevalue').val()));
+        graph.setEdgeAttribute($('#edge-custId').val(), 'label', (parseFloat($('#edgevalue').val())));
     }
     updateNode() {
         let e = $('#nodevalue').val();
         // set internal value
-        this.init_state[$('#node-custId').val()] = e;
+        this.init_state[$('#node-custId').val()] = parseFloat(e);
 
     }
 
@@ -147,7 +147,7 @@ class FCM {
                 type: "arrow",
                 label: value,
                 color: graph.getNodeAttributes(from)["color"],
-                size: 4
+                size: 10
             });
         } else {
             let t = this.init_state_keys;
@@ -157,7 +157,7 @@ class FCM {
                         type: "arrow",
                         label: value,
                         color: graph.getNodeAttributes(from)["color"],
-                        size: 4
+                        size: 10
                     });
                 }
             });

@@ -3,7 +3,7 @@
   <div class="btn-toolbar mb-2 mb-md-0">
     <div class="btn-group me-2">
       <a href="/models" class="btn btn-secondary">Vissza</a>
-      
+
       <button type="button" class="btn btn-primary" onclick="runMySimulation()">Szimulálás</button>
       <button type="button" class="btn btn-primary" onclick="runMyReduction()">Redukció</button>
 
@@ -17,30 +17,11 @@
 </div>
 
 <script>
-  function runServerReduction() {
-    let e = $("#e").val();
-$.post("/ajax/reduction", {
-  cm: JSON.stringify(fcm2.getFCMConnectionMatrix()),
-  e: e
-}, function (data) {
-
-  const winUrl = URL.createObjectURL(
-    new Blob([data], {
-      type: "text/html"
-    })
-  );
-
-  const win = window.open(
-    winUrl,
-    "win",
-    `width=800,height=400,screenX=200,screenY=200`
-  );
-});
-}
   function runMyReduction() {
-
+    let e = parseFloat($("#E").val());
     $.post("/reduction", {
-      cm: JSON.stringify(fcm2.getFCMConnectionMatrix())
+      cm: JSON.stringify(fcm2.getFCMConnectionMatrix()),
+      E: e
     }, function (data) {
 
       const winUrl = URL.createObjectURL(
@@ -60,7 +41,11 @@ $.post("/ajax/reduction", {
   function runMySimulation() {
     $.post("/simulation", {
       i: JSON.stringify(fcm2.getFCMState()),
-      cm: JSON.stringify(fcm2.getFCMConnectionMatrix())
+      cm: JSON.stringify(fcm2.getFCMConnectionMatrix()),
+      itter:$("#itter").val(),
+      lambda:$("#lambda").val(),
+      treshold:$("#treshold").val()
+
     }, function (data) {
 
       const winUrl = URL.createObjectURL(

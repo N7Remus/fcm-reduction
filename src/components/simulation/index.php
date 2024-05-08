@@ -13,7 +13,9 @@ if (!empty($_POST["i"])){
 
 
 ?>
-
+<style>.main_menu{
+    display:none !important;
+}</style>
   <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
   <!-- <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script> -->
   <script type="module" src="https://pyscript.net/latest/pyscript.js"></script>
@@ -36,6 +38,12 @@ import numpy as np
 
 init_state_json  = '''<?=json_encode($STATE)?>'''
 conn_mx_json = '''<?=json_encode($W)?>'''
+
+l = <?=(intval($_POST["lambda"])?$_POST["lambda"]:1)?>
+
+itterations = <?=(intval($_POST["itter"])?$_POST["itter"]:11)?>
+
+treshold= <?=(floatval($_POST["treshold"])?$_POST["treshold"]:0.0001)?>
 
 <?php 
 //include "simulation_dev.py" ;

@@ -2,7 +2,6 @@
 include DIR . "ajax_mod/model.php";
 
 // var_dump(getModel($uri[2]));
-$model = getModel($uri[2]);
 
 /* var_dump($_POST, $uri[2]); */
 
@@ -19,7 +18,7 @@ if (!empty($_POST)) {
 
     if (!empty($_POST["name"])) {
         // modell paraméterek mentése
-        echo "modell paraméterek mentése";
+        echo "modell paraméterek mentése - ";
         if (empty($_POST["itter"])) {
             $_POST["itter"] = 10;
         }
@@ -35,6 +34,10 @@ if (!empty($_POST)) {
         if (empty($_POST["E"])) {
             $_POST["E"] = 0.001;
         }
+        if (empty($_POST["treshold"])) {
+            $_POST["treshold"] = 0.001;
+        }
+        
 
         if (updateModelParams($uri[2],$_POST["name"], json_encode($_POST))){
             echo "Sikeres mentés";
@@ -45,6 +48,7 @@ if (!empty($_POST)) {
     }
 }
 
+$model = getModel($uri[2]);
 
 
 $init_state = json_decode($model["model_init_state"], true);

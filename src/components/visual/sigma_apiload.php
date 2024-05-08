@@ -11,16 +11,22 @@
 </style>
 
 
-
 <button type="button" class="btn btn-primary" onclick="setSigMode(0)">Mozgatás</button>
 <button type="button" class="btn btn-secondary" onclick="setSigMode(1)">Reláció felvitel fogalmak között</button>
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Paraméterek megadása és mentés
 </button>
+</br>
+<br>
+
+<p>A csúcsokat egér jobb gombjával való kattintással lehet hozzáadni, a mozgatás módban(alapértelmezett).</p>
+<p>A csúcsokat mozgatni rájuk kattintva lehet, az egérgomb felengedésével a mozgatás az aktuális kordinátnál marad.</p>
+<p>Az éleket felvitel módban lehet rögzíteni. Egy csúcsra az egér jobb gombjával kattintva a reláció kiinduló pontja jelölhető ki, majd a ball egér gombbal egy másik csúcsra kattintva választható ki a célja.</p>
+<p>A csúcsok érétke duplakattintással, az élek értékét (az élre) sima kattintással lehet megváltoztatni. </p>
+<p>A modell elkészítése után paraméterezhető és menthető, vagy az aktuális állapottal futtatható rajta szimuláció és redukció.</p>
 
 
-<br><br>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -41,20 +47,21 @@
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Maximális szimulációs iterációk száma
                             (10)</label>
-                        <input type="number" class="form-control" id="" name="itter"
-                            value="<?= @$model_params["itter"] ?>">
+                        <input type="number" class="form-control" id="itter" name="itter" value="<?= @$model_params["itter"] ?>">
                     </div>
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Lambda (1)</label>
-                        <input type="number" class="form-control" id="" name="lambda"
-                            value="<?= @$model_params["lambda"] ?>">
+                        <input type="number" class="form-control" id="lambda" name="lambda" value="<?= @$model_params["lambda"] ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">treshold - (0.0001)</label>
+                        <input type="number" class="form-control" id="treshold" name="treshold" value="<?= @$model_params["treshold"] ?>">
                     </div>
                     <div class="mb-3">
                         <label for="disabledSelect" class="form-label">Aktivációs függvény (Módosított
                             Kosko)</label>
-                        <select id="disabledSelect" class="form-select" id="" name="interf"
-                            value="<?= @$model_params["interf"] ?>">
+                        <select id="disabledSelect" class="form-select" id="" name="interf" value="<?= @$model_params["interf"] ?>">
                             <option>Módosított Kosko</option>
                         </select>
                     </div>
@@ -68,7 +75,7 @@
                     <hr>
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Redukciós paraméter - E (0.0001)</label>
-                        <input type="number" class="form-control" id="" name="E" value="<?= @$model_params["E"] ?>">
+                        <input type="number" class="form-control" id="E" name="E" value="<?= @$model_params["E"] ?>">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégsem</button>

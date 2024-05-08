@@ -8,9 +8,12 @@ if (!empty($_POST["cm"])){
     $W = json_decode($_POST["cm"], true);
 }
 
-
-
+/* var_dump($_POST);
+ */
 ?>
+<style>.main_menu{
+    display:none !important;
+}</style>
   <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
   <!-- <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script> -->
   <script type="module" src="https://pyscript.net/latest/pyscript.js"></script>
@@ -31,6 +34,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 W = json.loads('''<?=json_encode($W)?>''')
+E = <?=(floatval($_POST["E"])?$_POST["E"]:0.001)?>
 
 <?php 
 include "reduction.py" ; 

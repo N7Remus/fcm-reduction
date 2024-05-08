@@ -10,8 +10,7 @@ print("Szimulációs lépések:")
 initial_state = json.loads(init_state_json)
 connection_matrix = json.loads(conn_mx_json)
 
-l = 1
-treshold=0.0001
+
 
 def sigmonoid(x):
     e = np.exp(1)
@@ -21,9 +20,9 @@ def mKosko(i,val):
     r = 0
     for row_i in range(len(connection_matrix)):
         if row_i != i:
-            relation = connection_matrix[row_i][i]
+            relation = float(connection_matrix[row_i][i])
             if relation!=0:
-                r += relation*val[row_i]
+                r += relation*float(val[row_i])
     rr = r +float(val[i])
     return sigmonoid(rr)
 
@@ -31,7 +30,7 @@ state = list(initial_state.values())
 states = []
 states.append(state)
 itter = 0
-for abcd in range(11):
+for abcd in range(itterations):
     itter+=1
     in_treshold=False
     next_state=[]

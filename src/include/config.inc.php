@@ -1,4 +1,6 @@
 <?php
+error_reporting(0); // dont report/show errors
+
 define("ENC_DEC_PASS",":o");
 define('BASE_URL', '');
 define('LOGOUT_LINK', '');
